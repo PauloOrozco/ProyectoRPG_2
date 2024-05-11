@@ -24,8 +24,8 @@ int main() {
    // Player *player = new Player("paulo", 45, 10, 4, 3);
 
 
-    Enemy *enemy = new Enemy("gato gris", 15, 6, 2, 5, 10);
-    Enemy *enemy2 = new Enemy("canela", 15, 6, 2, 5, 10);
+    Enemy *enemy = new Enemy("gato gris", 15, 6, 2, 5, 90);
+    Enemy *enemy2 = new Enemy("canela", 15, 6, 2, 5, 85);
 
     vector<Character*> participants;
 

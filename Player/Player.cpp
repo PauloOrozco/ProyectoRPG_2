@@ -25,6 +25,8 @@ void Player::doAttack(Character *target) {
 }
 
 void Player::takeDamage(int damage) {
+
+    damage = damage * level;
     int trueDamage = damage - defense;
 
     health-= trueDamage;
@@ -36,16 +38,31 @@ void Player::takeDamage(int damage) {
     }
 }
 
-void Player::levelUp() {
+void Player::levelUp()
+{
     level++;
-}
 
+    health += 2;
+    attack += 2;
+    defense += 2;
+    speed += 2;
+
+    cout << "Nivel: " << level << endl;
+    cout << "Mejoraste!! \n Health: " << health << "\n Attack: " << attack << "\n Defense: " << defense << "\n Speed: " << speed << endl;
+
+
+}
 void Player::gainExperience(int exp) {
     experience += exp;
+    cout << "Ganaste experiencia " << exp <<endl;
+
     if (experience >= 100) {
+        experience = experience - 100;
         levelUp();
-        experience = 100-experience;
+        cout << "Experiencia: " << experience << endl;
+
     }
+
 }
 
 Character* Player::selectTarget(vector<Enemy*> possibleTargets) {
@@ -78,6 +95,11 @@ Action Player::takeAction(vector<Enemy*> enemies) {
             currentAction.target = target;
             currentAction.action = [this, target](){
                 doAttack(target);
+                if (target -> getHealth() <= 0)
+                {
+                    this->gainExperience(((Enemy *) target)->getExperience());
+
+                }
             };
             currentAction.speed = getSpeed();
             break;
