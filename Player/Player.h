@@ -6,6 +6,7 @@
 #define RPG_PLAYER_H
 #include "../Character/Character.h"
 #include "../Enemy/Enemy.h"
+#include "../Combat/Action.h"
 #include <vector>
 
 class Enemy;
@@ -17,7 +18,6 @@ class Player: public Character
 private:
     int level;
     int experience;
-    Enemy* selectedEnemy;
 
     void levelUp();
     void saveProgress();
@@ -31,18 +31,14 @@ public:
     void takeDamage(int damage) override;
     Character* selectTarget(vector<Enemy*> possibleTargets);
     Action takeAction(vector<Enemy*> enemies);
+
+    //serialización
     char* serialize();
     static Player* unserialize(char* buffer);
 
     void gainExperience(int exp);
 
     static const unsigned int BUFFER_SIZE = sizeof (name) + sizeof(health) + sizeof(attack) + sizeof(defense) + sizeof(speed) + sizeof(isPlayer) + sizeof(level) + sizeof(experience);
-
-    void setSelectedEnemy(Enemy* enemy)
-    {
-        selectedEnemy = enemy;
-    }
-    void levelUpEnemies(const std::vector<Enemy*>& enemies);
 
 private:
     char buffer[Player::BUFFER_SIZE];

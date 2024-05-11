@@ -13,4 +13,6 @@ add_executable(rpg main.cpp
         Combat/Combat.cpp
         Combat/Combat.h
         Combat/Action.h
-        Combat/Action.cpp)
+        Combat/Action.cpp
+        Files/FileHandler.h
+        Files/FileHandler.cpp)
